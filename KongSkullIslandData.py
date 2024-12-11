@@ -1,19 +1,21 @@
 import requests
-from HelperFunctionsScraping import to_csv, scrape_json_key
+from HelperFunctions import to_csv, scrape_json_key
 
-# Information for specific site
+# Information for site
 base_url = "https://www.rottentomatoes.com/napi/movie/22940c20-37cd-376a-8ac9-9ce17b0a9799/reviews/all"
 headers_to_be_scraped = ['criticName','creationDate','isFresh','isRotten','isTopCritic', 'quote', 'scoreSentiment','publicationName','reviewUrl']
 json_key_to_scrape = 'reviews'
+
+# Info for CSV file
 file_name_to_create = "KongAllReviews.csv"
 headers_for_file = ["Author", "Date", "Is Fresh", "Is Rotten", "Top Critic", "Review", "Sentiment", "Publication", "URL Publication"]
 
-
-has_next = True    # Scrape at least first page
+# Pagination
+has_next = True
 next_page = ""
-
 data = []
-# For pagination
+
+
 while has_next:
     try:
         url = base_url + next_page
